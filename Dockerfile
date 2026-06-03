@@ -1,9 +1,9 @@
-FROM 3.12-slim AS build
+FROM python:3.12-slim AS build
 ADD . /app
 WORKDIR /app
 RUN pip install --prefix=/devops -r requirements.txt
 
-FROM 3.12-slim AS runtime
+FROM python:3.12-slim AS runtime
 LABEL project="pythonproject"
 COPY --from=build /app /aws
 COPY --from=build /devops /usr/local
